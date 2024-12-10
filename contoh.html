@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Portofolio</title>
+    <link rel="icon" href="logoweb.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            font-size: 16px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: white;
+            color: black;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 10px; 
+            margin: 10px 10px;
+            border-radius: 50px;
+            opacity: 0.9;
+        }
+
+        .navbar img {
+            height: 50px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: black;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: black;
+            color: white;
+            border-radius: 50px;
+        }
+
+        .intro {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            color: white;
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 150px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 20px auto;
+            opacity: 0; /* Awalnya gambar tidak terlihat */
+            animation: fadeIn 2s forwards; /* Animasi muncul secara perlahan */
+        }
+
+        /* about me */
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center; /* Mengatur agar gambar dan teks sejajar secara vertikal */
+            gap: 10px; /* Jarak antara gambar dan teks */
+            border-radius: 10px;
+            opacity: 0.9;
+        }
+        .profile-image {
+            flex: 1; /* Mengatur gambar agar memiliki ruang 1 bagian */
+        }
+        .profile-image img {
+            width: 95%;
+            max-width: auto;
+            border-radius: 50%;
+            animation: fadeIn 2s forwards;
+        }
+        .about-me {
+            flex: 2; /* Mengatur deskripsi agar mengambil ruang lebih banyak */
+            text-align: left; /* Mengatur teks rata kiri */
+        }
+        .about-me h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .about-me h2 {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .about-me p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .about-me hr {
+            width: 50%;
+            margin: 20px 0;
+            border: none;
+            height: 2px;
+            background-color: red;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Pada layar kecil, susunan menjadi kolom */
+            }
+        }
+
+        /* project */
+        .content {
+            padding: 20px;
+            color: aliceblue;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+
+        .content h1 {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .boxes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .jurusan-title {
+            text-align: center;
+            margin-top: 40px;
+            color: aliceblue;
+        }
+
+        .photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .photos img, .photos .placeholder {
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .photos img:hover {
+            transform: scale(1.1); /* Membesar saat hover */
+        }
+
+        /* Placeholder divs */
+        .photos .placeholder {
+            visibility: hidden; /* Tidak terlihat tapi tetap mengambil tempat */
+        }
+
+        /*tombol review all dan sembunyikan*/
+        #reviewAllBtn, #hideAllBtn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            width: 200px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect untuk tombol */
+        #reviewAllBtn:hover, #hideAllBtn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Pusatkan tombol di bawah foto */
+        #reviewAllBtn, #hideAllBtn {
+            margin: 20px auto;
+        }
+
+        section {
+            padding: 60px 0;
+            text-align: center;
+            flex: 2; /* Mengatur deskripsi agar mengambil ruang lebih banyak */
+            text-align: left; /* Mengatur teks rata kiri */
+        }
+
+        
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .project-item {
+            width: 30%;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .project-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-item p {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .project-item:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        /*skill*/
+        .skill-item {
+            margin-bottom: 20px;
+            width: 1000px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item :hover {
+            transform: scale(1.1); /* Membesar saat hover */
+        }
+
+        .skill-bar {
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            width: auto;
+            height: 25px;
+            margin-top: 5px;
+        }
+
+        .skill-level {
+            background-color: #00b4d8;
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        /* Untuk perangkat dengan layar lebih besar dari 768px (tablet ke atas) */
+        @media (min-width: 768px) {
+            .box {
+                width: 70%;
+            }
+            .photos img {
+                width: calc(16% - 20px); /* Sesuaikan lebar gambar */
+            }
+        }
+
+        /* Untuk perangkat dengan layar lebih kecil dari 768px (HP) */
+        @media (max-width: 767px) {
+            .box {
+                width: 90%;
+            }
+            .photos {
+                flex-direction: column;
+                align-items: center;
+            }
+            .photos img {
+                width: 80%; /* Foto akan memenuhi lebar perangkat */
+                margin-bottom: 10px;
+            }
+        }
+        .typing-text {
+            font-size: 36px;
+            border-right: 2px solid white;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /*anime*/
+        .containerr {
+            display: flex;
+            width: max-content;
+            gap: 2rem;
+        }
+
+        .h2{
+            text-align: center;
+        }
+
+        .horizontal-scroll {
+            width: 100%;
+            overflow-x: auto; /* auto untuk memunculkan scroll ketika dibutuhkan */
+            white-space: nowrap; /* Memastikan konten tidak terputus dan tetap dalam satu baris */
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 8px; /* Atur tinggi scrollbar untuk terlihat lebih jelas */
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background-color: #d72727; /* Warna untuk thumb scrollbar */
+            border-radius: 10px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: #555; /* Warna saat scrollbar disentuh/hover */
+        }
+
+        .containerr img {
+            width: auto; /* Ukuran gambar tetap sama */
+            height: 150px;
+            object-fit: cover; /* Memastikan proporsi gambar baik */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .containerr img:hover {
+            transform: scale(1.1); /* Membesar saat hover */
+        }
+
+        /*foooter*/
+        .footer {
+            background-color: #0A2742;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 10px;
+            min-width: 200px;
+        }
+
+        .footer-logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #FFD700; /* Warna kuning */
+        }
+
+        .social-icons a {
+            margin-right: 10px;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            padding: 10px 20px;
+            background-color: #FFD700; /* Warna kuning */
+            border: none;
+            border-radius: 5px;
+            color: #0A2742; /* Warna biru */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #E5C100;
+        }
+
+        .footer-section.map iframe {
+            width: 100%;
+            height: 300px;
+            max-width: 400px;
+        }
+
+
+        /* Animasi untuk elemen */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-in {
+            transform: translateX(-100%);
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        #backToTop {
+            display: none; /* Awalnya disembunyikan */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100; /* Agar tombol selalu di atas elemen lainnya */
+            border: none;
+            outline: none;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        #backToTop:hover {
+            background-color: white; /* Warna saat di-hover */
+        }
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header class="navbar">
+            <a href="https://www.linkedin.com/in/arizqykhylmi/"><img src="logoweb.png" alt="Logo"></a>
+            <ul>
+                <li><a href="#beranda">Home</a></li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#skill">Skill</a></li>
+                <li><a href="#anime">Anime</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+
+            </ul>
+        </header>
+
+        <section class="intro">
+            <img src="muka.jpeg" alt="Your Photo" class="profile-photo">
+            <h1 class="typing-text"></h1>
+        </section>
+    </div>
+
+    <div class="container">
+        <div class="profile-image">
+            <img src="muka2.jpg" alt="Profile Picture">
+        </div>
+        <div class="about-me">
+            <div id="profile">
+            <h1>About Me</h1>
+            <hr>
+            <h2>Junior programmer</h2>
+            <p>Hi, my name is M. Arizqy Khylmi, a junior programmer, I am 16 years old, I live in the city of Bogor, now I study at SMK Wikrama Bogor majoring in Software and Game Development, I am an expert in creating websites using the programming languages ​​HTML, CSS, JavaScript, and PHP.
+                I am not only an expert in the field of Web Development, but also have a side in designing posters, I express this through design work on platforms such as Canva.
+                During my time at SMK Wikrama Bogor, I have succeeded in developing various web projects, including personal portfolio sites, sales sites, fuel sites and others.</p><br>
+                <p>"Titik koma aja ku perhatiin, apalagi kamu!"</p><a href="https://www.youtube.com/watch?v=GhkvCsazL5s"><svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#050505" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm177.6 62.1C192.8 334.5 218.8 352 256 352s63.2-17.5 78.4-33.9c9-9.7 24.2-10.4 33.9-1.4s10.4 24.2 1.4 33.9c-22 23.8-60 49.4-113.6 49.4s-91.7-25.5-113.6-49.4c-9-9.7-8.4-24.9 1.4-33.9s24.9-8.4 33.9 1.4zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm165.8 21.7c-7.6 8.1-20.2 8.5-28.3 .9s-8.5-20.2-.9-28.3c14.5-15.5 35.2-22.3 54.6-22.3s40.1 6.8 54.6 22.3c7.6 8.1 7.1 20.7-.9 28.3s-20.7 7.1-28.3-.9c-5.5-5.8-14.8-9.7-25.4-9.7s-19.9 3.8-25.4 9.7z"/></svg></a>
+        </div>
+    </div>
+</div><br>
+    
+<div id="project">
+    <h2 class="jurusan-title">My Project (PPLG)</h2>
+    <button id="reviewAllBtn">Review All</button> <!-- Tombol untuk menampilkan gambar -->
+    <button id="hideAllBtn" style="display:none;">Hide</button> <!-- Tombol sembunyikan, awalnya disembunyikan -->
+</div>
+
+<div class="photos">
+    <img src="foto/1.jpg" alt="Jurusan 9">
+    <img src="foto/2.jpg" alt="Jurusan 1">
+    <img src="foto/3.jpg" alt="Jurusan 2">
+    <img src="foto/4.jpg" alt="Jurusan 3">
+    <img src="foto/5.jpg" alt="Jurusan 4">
+    
+    <!-- Tambahkan kelas 'hidden' untuk gambar di baris kedua dan ketiga -->
+    <img class="hidden" src="foto/6.jpg" alt="Jurusan 5">
+    <img class="hidden" src="foto/7.jpg" alt="Jurusan 6">
+    <img class="hidden" src="foto/8.jpg" alt="Jurusan 7">
+    <img class="hidden" src="foto/9.jpg" alt="Jurusan 8">
+    <img class="hidden" src="foto/10.jpg" alt="Jurusan 9">
+    
+    <img class="hidden" src="foto/11.jpg" alt="Jurusan 9">
+    <img class="hidden" src="foto/12.jpg" alt="Jurusan 1">
+    <img class="hidden" src="foto/13.jpg" alt="Jurusan 2">
+    <img class="hidden" src="foto/14.jpg" alt="Jurusan 3">
+    <img class="hidden" src="foto/15.jpg" alt="Jurusan 4">
+    <img class="hidden" src="foto/16.jpg" alt="Jurusan 5">
+    <img class="hidden" src="foto/17.jpg" alt="Jurusan 6">
+    <img class="hidden" src="foto/18.jpg" alt="Jurusan 7">
+    <img class="hidden" src="foto/19.png" alt="Jurusan 7">
+</div><br>
+
+<div id="project">
+    <h2 class="jurusan-title">My Project (Design)</h2>
+<div class="photos">
+    <img src="foto/DUCATI (1).png" alt="Jurusan 1">
+    <img src="foto/CHIRON.png" alt="Jurusan 3">
+    <img src="foto/FERARRI.png" alt="Jurusan 2">
+    <img src="id-card.png" alt="Jurusan 2">
+</div>
+
+    <!--skill-->
+    
+    <section id="skill">
+        <div class="container">
+            <div class="skill-container">
+                <div id="skill">
+            </div>
+                <!-- Repeat this block for each skill -->
+                <div class="skill-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="52" width="44" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff7024" d="M0 32l34.9 395.8L191.5 480l157.6-52.2L384 32H0zm308.2 127.9H124.4l4.1 49.4h175.6l-13.6 148.4-97.9 27v.3h-1.1l-98.7-27.3-6-75.8h47.7L138 320l53.5 14.5 53.7-14.5 6-62.2H84.3L71.5 112.2h241.1l-4.4 47.7z"/></svg>
+                    <p>HTML</p>
+                </div>
+                <div class="skill-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="52" width="44" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#2a9cf4" d="M0 32l34.9 395.8L192 480l157.1-52.2L384 32H0zm313.1 80l-4.8 47.3L193 208.6l-.3 .1h111.5l-12.8 146.6-98.2 28.7-98.8-29.2-6.4-73.9h48.9l3.2 38.3 52.6 13.3 54.7-15.4 3.7-61.6-166.3-.5v-.1l-.2 .1-3.6-46.3L193.1 162l6.5-2.7H76.7L70.9 112h242.2z"/></svg>
+                    <p>CSS</p>
+                </div>
+                <div class="skill-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="52" width="44" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFD43B" d="M0 32v448h448V32H0zm243.8 349.4c0 43.6-25.6 63.5-62.9 63.5-33.7 0-53.2-17.4-63.2-38.5l34.3-20.7c6.6 11.7 12.6 21.6 27.1 21.6 13.8 0 22.6-5.4 22.6-26.5V237.7h42.1v143.7zm99.6 63.5c-39.1 0-64.4-18.6-76.7-43l34.3-19.8c9 14.7 20.8 25.6 41.5 25.6 17.4 0 28.6-8.7 28.6-20.8 0-14.4-11.4-19.5-30.7-28l-10.5-4.5c-30.4-12.9-50.5-29.2-50.5-63.5 0-31.6 24.1-55.6 61.6-55.6 26.8 0 46 9.3 59.8 33.7L368 290c-7.2-12.9-15-18-27.1-18-12.3 0-20.1 7.8-20.1 18 0 12.6 7.8 17.7 25.9 25.6l10.5 4.5c35.8 15.3 55.9 31 55.9 66.2 0 37.8-29.8 58.6-69.7 58.6z"/></svg>
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="52" width="44" viewBox="0 0 640 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#74C0FC" d="M320 104.5c171.4 0 303.2 72.2 303.2 151.5S491.3 407.5 320 407.5c-171.4 0-303.2-72.2-303.2-151.5S148.7 104.5 320 104.5m0-16.8C143.3 87.7 0 163 0 256s143.3 168.3 320 168.3S640 349 640 256 496.7 87.7 320 87.7zM218.2 242.5c-7.9 40.5-35.8 36.3-70.1 36.3l13.7-70.6c38 0 63.8-4.1 56.4 34.3zM97.4 350.3h36.7l8.7-44.8c41.1 0 66.6 3 90.2-19.1 26.1-24 32.9-66.7 14.3-88.1-9.7-11.2-25.3-16.7-46.5-16.7h-70.7L97.4 350.3zm185.7-213.6h36.5l-8.7 44.8c31.5 0 60.7-2.3 74.8 10.7 14.8 13.6 7.7 31-8.3 113.1h-37c15.4-79.4 18.3-86 12.7-92-5.4-5.8-17.7-4.6-47.4-4.6l-18.8 96.6h-36.5l32.7-168.6zM505 242.5c-8 41.1-36.7 36.3-70.1 36.3l13.7-70.6c38.2 0 63.8-4.1 56.4 34.3zM384.2 350.3H421l8.7-44.8c43.2 0 67.1 2.5 90.2-19.1 26.1-24 32.9-66.7 14.3-88.1-9.7-11.2-25.3-16.7-46.5-16.7H417l-32.8 168.7z"/></svg>
+                    <p>PHP</p>
+                </div>
+                <div class="skill-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="52" width="42" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff0000" d="M504.4 115.8a5.7 5.7 0 0 0 -.3-.7 8.5 8.5 0 0 0 -.5-1.3 6 6 0 0 0 -.5-.7 9.4 9.4 0 0 0 -.7-.9c-.2-.2-.5-.4-.8-.6a8.8 8.8 0 0 0 -.9-.7L404.4 55.6a8 8 0 0 0 -8 0L300.1 111h0a8.1 8.1 0 0 0 -.9 .7 7.7 7.7 0 0 0 -.8 .6 8.2 8.2 0 0 0 -.7 .9c-.2 .2-.4 .5-.5 .7a9.7 9.7 0 0 0 -.5 1.3c-.1 .2-.2 .4-.3 .7a8.1 8.1 0 0 0 -.3 2.1V223.2l-80.2 46.2V63.4a7.8 7.8 0 0 0 -.3-2.1c-.1-.2-.2-.5-.3-.7a8.4 8.4 0 0 0 -.5-1.2c-.1-.3-.4-.5-.5-.7a9.4 9.4 0 0 0 -.7-.9 9.5 9.5 0 0 0 -.8-.6 9.8 9.8 0 0 0 -.9-.7h0L115.6 1.1a8 8 0 0 0 -8 0L11.3 56.5h0a6.5 6.5 0 0 0 -.9 .7 7.8 7.8 0 0 0 -.8 .6 8.2 8.2 0 0 0 -.7 .9c-.2 .3-.4 .5-.6 .7a7.9 7.9 0 0 0 -.5 1.2 6.5 6.5 0 0 0 -.3 .7 8.2 8.2 0 0 0 -.3 2.1v329.7a8 8 0 0 0 4 7l192.5 110.8a8.8 8.8 0 0 0 1.3 .5c.2 .1 .4 .2 .6 .3a7.9 7.9 0 0 0 4.1 0c.2-.1 .4-.2 .6-.2a8.6 8.6 0 0 0 1.4-.6L404.4 400.1a8 8 0 0 0 4-7V287.9l92.2-53.1a8 8 0 0 0 4-7V117.9A8.6 8.6 0 0 0 504.4 115.8zM111.6 17.3h0l80.2 46.2-80.2 46.2L31.4 63.4zm88.3 60V278.6l-46.5 26.8-33.7 19.4V123.5l46.5-26.8zm0 412.8L23.4 388.5V77.3L57.1 96.7l46.5 26.8V338.7a6.9 6.9 0 0 0 .1 .9 8 8 0 0 0 .2 1.2h0a5.9 5.9 0 0 0 .4 .9 6.4 6.4 0 0 0 .4 1v0a8.5 8.5 0 0 0 .6 .8 7.6 7.6 0 0 0 .7 .8l0 0c.2 .2 .5 .4 .8 .6a8.9 8.9 0 0 0 .9 .7l0 0 0 0 92.2 52.2zm8-106.2-80.1-45.3 84.1-48.4 92.3-53.1 80.1 46.1-58.8 33.6zm184.5 4.6L215.9 490.1V397.8L346.6 323.2l45.8-26.2zm0-119.1L358.7 250l-46.5-26.8V131.8l33.7 19.4L392.4 178zm8-105.3-80.2-46.2 80.2-46.2 80.2 46.2zm8 105.3V178L455 151.2l33.7-19.4v91.4h0z"/></svg>
+                    <p>Laravel</p>
+                </div>
+            </div>
+        </div>
+</section><br>
+
+<main>
+    <div id="anime">
+    <h2 class="h2">Anime Favorit</h2>
+</div>
+    <div class="horizontal-scroll">
+        <div class="containerr">
+            <div class="item">
+                <img src="animefoto/anim1.jpg" alt="anime1">
+                <img src="animefoto/anim2.jpg" alt="anime2">
+                <img src="animefoto/anim3.jpeg" alt="anime3">
+                <img src="animefoto/anim4.jpg" alt="anime4">
+                <img src="animefoto/anim5.jpg" alt="anime5">
+                <img src="animefoto/anim6.jpg" alt="anime6">
+                <img src="animefoto/anim7.jpg" alt="anime7">
+                <img src="animefoto/anim8.jpg" alt="anime8">
+                <img src="animefoto/anim9.jpg" alt="anime9">
+                <img src="animefoto/anim10.jpg" alt="anime10">
+                <img src="animefoto/anim11.jpg" alt="anime11">
+                <img src="animefoto/anim12.jpg" alt="anime12">
+                <img src="animefoto/anim13.jpg" alt="anime13">
+                <img src="animefoto/anim14.jpg" alt="anime14">
+                <img src="animefoto/anim15.jpg" alt="anime15">
+                <img src="animefoto/anim16.jpg" alt="anime16">
+                <img src="animefoto/anim17.jpg" alt="anime17">
+                <img src="animefoto/anim18.jpg" alt="anime18">
+                <img src="animefoto/anim19.jpg" alt="anime19">
+                <img src="animefoto/anim20.jpg" alt="anime20">
+                <img src="animefoto/anim21.jpg" alt="anime21">
+                <img src="animefoto/anim22.jpg" alt="anime22">
+                <img src="animefoto/anim23.jpg" alt="anime23">
+                <img src="animefoto/anim24.jpg" alt="anime24">
+                <img src="animefoto/anim25.jpg" alt="anime25">
+                <img src="animefoto/anim26.jpg" alt="anime26">
+                <img src="animefoto/anim27.jpg" alt="anime27">
+                <img src="animefoto/anim28.jpg" alt="anime28">
+                <img src="animefoto/anim29.jpg" alt="anime29">
+                <img src="animefoto/anim30.jpg" alt="anime300">
+            </div>
+        </div>
+    </div>
+</main>
+                    <!-- Add 4 more skill items -->
+                </div>
+            </div>
+        </section>
+
+    <!--footer-->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section address">
+                <div id="contact">
+                <a href="https://smkwikrama.sch.id/"><img src="wikrama-logo.png" alt="SMK Wikrama Bogor" class="footer-logo"></a>
+            </div>
+                <h3>Alamat</h3>
+                <p>Jl. Raya Wangun Kelurahan Sindangsari Bogor Timur 16720</p>
+                <h3>Telepon</h3>
+                <p>0251-8242411 / 082221718035 (Whatsapp)</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/arizqykhylmi/"><svg xmlns="http://www.w3.org/2000/svg" height="32" width="28" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#2474ff" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+                    <a href="https://open.spotify.com/playlist/5j2wGWoaJkIUkQ44GB7sqV"><svg xmlns="http://www.w3.org/2000/svg" height="32" width="31" viewBox="0 0 496 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#24ff14" d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"/></svg></a>
+                    <a href="https://www.instagram.com/alkzh._/?hl=en"><svg xmlns="http://www.w3.org/2000/svg" height="32" width="28" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+                    <a href="https://www.youtube.com/"><svg xmlns="http://www.w3.org/2000/svg" height="32" width="36" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff0000" d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-section map">
+                <!-- Embed Google Map -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d253842.32894668516!2d106.807296!3d-6.22592!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c89505b4c37d%3A0x307fc4a38e65fa2b!2sSMK%20Wikrama%20Bogor!5e0!3m2!1sen!2sid!4v1725435661017!5m2!1sen!2sid"
+                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Bersekolah di SMK Wikrama Bogor</h3>
+                <ul>
+                    <li><a href="https://smkwikrama.sch.id/">Sekolah</a></li>
+                    <li><a href="https://www.dicoding.com/certificates/GRX528JE2X0M">Certificate</a></li>
+                    <li><a href="https://www.youtube.com/@sandhikagalihWPU">Panutan</a></li>
+                    <li><a href="https://www.youtube.com/@cristiano">Idola</a></li>
+                    <li><a href="https://www.youtube.com/@WindahBasudara">Penyemangat</a></li>
+                    <li><a href="https://id.wikipedia.org/wiki/Berenang">Hobby</a></li>
+                    <li><a href="https://open.spotify.com/playlist/37i9dQZF1DWWY64wDtewQt">Produktif Mode</a></li>
+                    <li><a href="https://www.linkedin.com/in/arizqykhylmi/">Kerjasama</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-form">
+                <h3>Pesan</h3>
+                <form action="#">
+                    <input type="text" name="name" placeholder="Nama . . .">
+                    <input type="email" name="email" placeholder="Email . . .">
+                    <textarea name="message" placeholder="Pesan Anda..."></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+    <button id="backToTop" title="Kembali ke Atas"><svg xmlns="http://www.w3.org/2000/svg" height="32" width="24" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#2259b9" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2 160 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-306.7L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg></button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const navbarItems = document.querySelectorAll('.navbar ul li a');
+    const contentSections = document.querySelectorAll('.content-section');
+
+    navbarItems.forEach(item => {
+        item.addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah scrolling default
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+
+            // Menghapus animasi dari semua section
+            contentSections.forEach(section => {
+                section.classList.remove('fade-in', 'slide-in');
+            });
+
+            // Tambahkan kelas animasi ke section yang dipilih
+            targetSection.classList.add('fade-in'); // Atau 'slide-in'
+
+            // Scroll ke section yang dipilih
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+});
+
+    // Ketika pengguna scroll halaman, jalankan fungsi ini
+window.onscroll = function() { scrollFunction(); };
+
+function scrollFunction() {
+    const backToTopButton = document.getElementById("backToTop");
+    
+    // Jika pengguna scroll lebih dari 20px dari atas halaman, tampilkan tombol
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        backToTopButton.style.display = "block";
+    } else {
+        backToTopButton.style.display = "none";
+    }
+}
+
+        const text = "Hi, I'm M. Arizqy Khylmi, Welcome to my portofolio website!";
+        let index = 0;
+
+        function typeText() {
+            const typingText = document.querySelector('.typing-text');
+            typingText.textContent = text.slice(0, index);
+            index++;
+

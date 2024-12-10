@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" href="image/logo-removebg-preview.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <title>Curriculum Vitae</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                 <span>LogicLab Studio</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="home.html">Home</a></div>
+                <!-- <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">About</a></div> -->
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="skills.html"">Skills</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="project.html">Project</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html">Contact</a></div>
+            </div>
+        </div>
+        <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        <div class="dropdown">
+            <div class="links">
+                <a href="home.html">Home</a>
+                <!-- <a href="about.html">About</a> -->
+                <a href="skills.html">Skills</a>
+                <a href="project.html">Project</a>
+                <a href="contact.html">Contact</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+    <div class="landing_page">
+        <div class="responsive-container-block big-container">
+          <img class="bg-img" id="iq5bf" src="image/code-bg.jpg">
+          <div class="responsive-container-block container">
+            <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12 left-one">
+              <div class="content-box">
+                <p class="text-blk section-head">
+                    Saya menyediakan solusi terbaik untuk kebutuhan Anda.
+                </p>
+                <p class="text-blk section-subhead">
+                    Saya menyediakan layanan pembuatan website profesional untuk kebutuhan personal, bisnis, atau perusahaan. Dari desain modern hingga fitur fungsional, kami memastikan website Anda menarik, responsif, dan mudah digunakan.
+                </p>
+              </div>
+            </div>
+            <div class="responsive-cell-block wk-ipadp-6 wk-tab-12 wk-mobile-12 wk-desk-6 right-one" id="i1zj">
+              <form class="form-box">
+                <div class="container-block form-wrapper">
+                  <p class="text-blk contactus-head">
+                    <a class="link" href="">
+                    </a>
+                    Hubungi saya
+                  </p>
+                  <p class="text-blk contactus-subhead">
+                    Isi formulir di bawah ini untuk informasi lebih lanjut!
+                  </p>
+                  <div class="responsive-container-block">
+                    <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="i10mt-7">
+                      <input class="input" id="ijowk-7" name="FirstName" placeholder="First Name">
+                    </div>
+                    <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="i1ro7">
+                      <input class="input" id="indfi-5" name="Last Name" placeholder="Last Name">
+                    </div>
+                    <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-6 wk-ipadp-6 emial" id="ityct">
+                      <input class="input" id="ipmgh-7" name="Email" placeholder="Email">
+                    </div>
+                    <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12">
+                      <input class="input" id="imgis-6" name="PhoneNumber" placeholder="Phone Number">
+                    </div>
+                    <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="i634i-7">
+                      <textarea aria-placeholder="Type message here" class="textinput" id="i5vyy-7" placeholder="Type message here"></textarea>
+                    </div>
+                  </div>
+                  <button class="submit-btn" type="button" onclick="sendWhatsAppMessage()">
+                    Kirim Pesan
+                  </button>                  
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      
+      AOS.init({offset:0,});
+      function sendWhatsAppMessage() {
+      const firstName = document.getElementById("ijowk-7").value;
+      const lastName = document.getElementById("indfi-5").value;
+      const email = document.getElementById("ipmgh-7").value;
+      const phoneNumber = document.getElementById("imgis-6").value;
+      const message = document.getElementById("i5vyy-7").value;
+
+      // Nomor WhatsApp tujuan (masukkan nomor Anda di sini)
+      const phoneNumberWhatsApp = "6282110901694"; // ganti dengan nomor WhatsApp Anda
+
+      // Format pesan
+      const whatsappMessage = `Halo, saya ${firstName} ${lastName}.
+  Email: ${email}
+  Nomor Telepon: ${phoneNumber}
+  Pesan: ${message}`;
+
+      // Buka WhatsApp dengan pesan
+      const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumberWhatsApp}&text=${encodeURIComponent(whatsappMessage)}`;
+      window.open(whatsappURL, "_blank");
+    }
+      // Buat tautan API WhatsApp
+      const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumberWhatsApp}&text=${encodeURIComponent(whatsappMessage)}`;
+
+    // Arahkan pengguna ke WhatsApp
+    window.open(whatsappURL, "_blank");
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
+<!-- HTML !-->
+<button class="button-24" role="button">Button 24</button>

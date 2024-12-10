@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" href="image/logo-removebg-preview.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <title>Curriculum Vitae</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                 <span>LogicLab Studio</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="home.html">Home</a></div>
+                <!-- <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">About</a></div> -->
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="skills.html"">Skills</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="project.html">Project</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html">Contact</a></div>
+            </div>
+        </div>
+        <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        <div class="dropdown">
+            <div class="links">
+                <a href="home.html">Home</a>
+                <!-- <a href="about.html">About</a> -->
+                <a href="skills.html">Skills</a>
+                <a href="project.html">Project</a>
+                <a href="contact.html">Contact</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+    <div id="project">
+        <h2 class="jurusan-title">My Project (PPLG)</h2>
+        <button id="reviewAllBtn">Review All</button>
+  <button id="hideAllBtn" style="display: none;">Hide All</button>
+    </div>
+    <div class="photos">
+        <div class="image-container">
+            <img src="image/1.png" alt="Jurusan 9">
+            <div class="overlay-text">Halaman Biaya pendaftaran</div>
+        </div>
+        <div class="image-container">
+            <img src="image/2.png" alt="Jurusan 9">
+            <div class="overlay-text">Halaman pengisian data diri</div>
+        </div>
+        <div class="image-container">
+            <img src="image/3.png" alt="Jurusan 9">
+            <div class="overlay-text">Halaman pengisian formulir data orang tua</div>
+        </div>
+        <div class="image-container">
+            <img src="image/4.png" alt="Jurusan 9">
+            <div class="overlay-text">Membuat table</div>
+        </div>
+        <div class="image-container">
+            <img src="image/5.png" alt="Jurusan 9">
+            <div class="overlay-text">Website daftar destinasi di Indonesia</div>
+        </div>
+        
+        <!-- Tambahkan kelas 'hidden' untuk gambar di baris kedua dan ketiga -->
+        <img class="hidden" src="image/6.png" alt="Jurusan 5">
+        <img class="hidden" src="image/7.png" alt="Jurusan 5">
+        <img class="hidden" src="image/8.png" alt="Jurusan 5">
+        <img class="hidden" src="image/9.png" alt="Jurusan 5">
+        <img class="hidden" src="image/10.png" alt="Jurusan 5">
+        <img class="hidden" src="image/11.png" alt="Jurusan 5">
+        <img class="hidden" src="image/12.png" alt="Jurusan 5">
+        <img class="hidden" src="image/13.png" alt="Jurusan 5">
+        <img class="hidden" src="image/14.png" alt="Jurusan 5">
+        <img class="hidden" src="image/15.png" alt="Jurusan 5">
+        <img class="hidden" src="image/16.png" alt="Jurusan 5">
+        <img class="hidden" src="image/17.png" alt="Jurusan 5">
+        <img class="hidden" src="image/18.png" alt="Jurusan 5">
+    </div><br>
+    <section>
+        <div id="project">
+            <h2 class="jurusan-title" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">My Project (Design)</h2>
+            <div class="photos">
+                <img src="image/DUCATI.png" class="hover-effect" data-aos="fade-up" alt="Jurusan 1">
+                <img src="image/CHIRON.png" class="hover-effect" data-aos="fade-up" alt="Jurusan 1">
+                <img src="image/FERARRI.png" class="hover-effect" data-aos="fade-up" alt="Jurusan 1">
+                <img src="image/motor.png" class="hover-effect" data-aos="fade-up" alt="Jurusan 1">
+                <img src="image/idcard.png" class="hover-effect" data-aos="fade-up" alt="Jurusan 1">
+                <img src="image/poster.png" class="hover-effect" data-aos="fade-up" alt="Jurusan 1">
+                
+            </div>
+        </div>
+    </section>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({offset:0,});
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
